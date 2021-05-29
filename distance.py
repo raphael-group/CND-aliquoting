@@ -12,7 +12,7 @@ def compress_cn_mat(mat):
 
 def validateProfiles(u,v):
     return not np.logical_and(np.array(u)==0,np.array(v)>0).any()
-                
+
 def print_events_summaries(e,name):
     x = np.clip(np.hstack((e[0],e[1:]-e[:-1],0)),0,np.inf)
     y = np.clip(np.hstack((0,e[:-1]-e[1:],e[-1])),0,np.inf)

@@ -52,7 +52,7 @@ def additional_ops(ti, tprev, si, sprev, p):
             return p * si - ti
     else:
         return 0
-    
+
 def odd_runs(V):
     """Compute the number of odd runs; used for halving distance"""
     num_odd_runs = 0
@@ -81,7 +81,7 @@ def reconstruct_indexes(C, m):
         i -= 1
         x = m[i, int(x)]
         yield int(x)
-        
+
 def cnd_aliquoting_I(T, p=2):
     """Implementation of aliquoting using O(n^2) time.
     Does not handle zero coords properly; preprocess to remove them."""
@@ -92,7 +92,7 @@ def cnd_aliquoting_I(T, p=2):
     m[:] = -1
     for i in range(n):
         ti = T[i]
-        
+
         for x in range(2*n):
             # if x < n, then we are doing base + x*p amplifications.
             # if x >= n, then we are doing base + (x - n)*p deletions.
@@ -106,7 +106,7 @@ def cnd_aliquoting_I(T, p=2):
                 if i == 0:
                     C[i, idx] = np.abs(p*si - ti)
                 else:
-                    
+
                     argmin = None
                     val = np.inf
 
@@ -115,7 +115,7 @@ def cnd_aliquoting_I(T, p=2):
                         prev_base_ops = base_dels(T[i-1], p)
                         y1_idx = n + int(np.ceil((ops - prev_base_ops) / p))
                         y2_idx = n + int(np.floor((ops - prev_base_ops) / p))
-                        
+
                     else:
                         ops = base_amps(T[i], p) + o * p
                         prev_base_ops = base_amps(T[i-1], p)
@@ -124,7 +124,7 @@ def cnd_aliquoting_I(T, p=2):
                             y1_idx = 0
                         y2_idx = int(np.floor((ops - prev_base_ops) / p))
                         y2_idx = min(int(np.floor((T[i-1]) / p))-1, y2_idx)
-                        
+
                     for y in [y1_idx, y2_idx, 0, n]:
                         if (y < 0) or (y >= 2*n): continue
                         if y < n:
@@ -138,21 +138,21 @@ def cnd_aliquoting_I(T, p=2):
 
                     C[i, idx] = val
                     m[i, idx] = argmin
-                    
-                        
+
+
     # reconstruct preduplication profile
     a = C[n-1].argmin()
     x = m[n-1, a]
     l = reversed([a, int(x)] + list(reconstruct_indexes(C, m)))
-    S = list(map(lambda x: (np.floor(x[0] / p) - x[1]) if x[1] < n 
+    S = list(map(lambda x: (np.floor(x[0] / p) - x[1]) if x[1] < n
                  else (np.ceil(x[0] / p) + (x[1] - n)), zip(T,l)))
     S = np.array(S)
-    
+
     return C[n-1].min(), S, C, m
 
 
 def cnd_aliquoting_dp(T, p=2, plot=False):
-    """Implementation of aliquoting using O(n^3) time, and optionally 
+    """Implementation of aliquoting using O(n^3) time, and optionally
     generates a figure to visualize an optimal aliquoting CNT.
     Does not handle zero coords properly; exclude them."""
     n = len(T)
@@ -162,7 +162,7 @@ def cnd_aliquoting_dp(T, p=2, plot=False):
     m[:] = np.nan
     for i in range(n):
         ti = T[i]
-        
+
         for x in range(2*n):
             # if x < n, then we are doing x amplifications.
             # if x >= n, then we are doing x - n deletions.
@@ -190,19 +190,19 @@ def cnd_aliquoting_dp(T, p=2, plot=False):
                             argmin = y+n
                     C[i, idx] = val
                     m[i, idx] = argmin
-            
+
     # reconstruct preduplication profile
     a = C[n-1].argmin()
     x = m[n-1, a]
     l = reversed([a, int(x)] + list(reconstruct_indexes(C, m)))
-    S = list(map(lambda x: (np.floor(x[0] / p) - x[1]) if x[1] < n 
+    S = list(map(lambda x: (np.floor(x[0] / p) - x[1]) if x[1] < n
                  else (np.ceil(x[0] / p) + (x[1] - n)), zip(T,l)))
     S = np.array(S)
     pS = p * S
     if plot:
         from matplotlib import pyplot as plt
         ax = plt.figure().gca()
-        ax.yaxis.get_major_locator().set_params(integer=True) 
+        ax.yaxis.get_major_locator().set_params(integer=True)
         plt.bar(range(n), (T - pS))
         plt.grid(True, axis='y')
         plt.show()
