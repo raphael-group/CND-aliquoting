@@ -67,7 +67,8 @@ def odd_runs(V):
     return num_odd_runs
 
 def cnd_halving(T):
-    """Halving algorithm"""
+    """Halving algorithm: computes the halving distance and an
+    optimal preduplication profile for a given input profile T"""
     S = np.ceil(T / 2.0)
     return odd_runs(T), S
 
@@ -83,7 +84,11 @@ def reconstruct_indexes(C, m):
         yield int(x)
 
 def cnd_aliquoting_I(T, p=2):
-    """Implementation of aliquoting using O(n^2) time.
+    """Implementation of aliquoting using O(n^2) time:
+    computes the aliquoting distance and an optimal preduplication profile
+    for a given profile T and value p. In addition, this function will return
+    the dynamic programming tables used to solve the problem.
+
     Does not handle zero coords properly; preprocess to remove them."""
     n = len(T)
     C = np.empty((n, 2*n))
