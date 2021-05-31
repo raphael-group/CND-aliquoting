@@ -89,7 +89,9 @@ def cnd_aliquoting_I(T, p=2):
     for a given profile T and value p. In addition, this function will return
     the dynamic programming tables used to solve the problem.
 
-    Does not handle zero coords properly; preprocess to remove them."""
+    Does not handle zero entries of T properly; ensure that T has no zeroes.
+    (removing or adding zeroes does not change
+    aliquoting distance, as proven in our paper)"""
     n = len(T)
     C = np.empty((n, 2*n))
     C[:] = np.inf
@@ -159,7 +161,7 @@ def cnd_aliquoting_I(T, p=2):
 def cnd_aliquoting_dp(T, p=2, plot=False):
     """Implementation of aliquoting using O(n^3) time, and optionally
     generates a figure to visualize an optimal aliquoting CNT.
-    Does not handle zero coords properly; exclude them."""
+    Does not handle zero entries of T properly; exclude them."""
     n = len(T)
     C = np.empty((n, 2*n))
     C[:] = np.inf
