@@ -1,4 +1,4 @@
-Implementations of halving and aliquoting distance algorithms in Python 3. The minimum dependencies required are `numpy`, `pandas`, `matplotlib`, and `seaborn`
+Implementations of halving and aliquoting distance algorithms in Python 3. The minimum dependencies required are `numpy`, `pandas`, `matplotlib`, and `seaborn`.
 
 * `generate_data.ipynb`: Jupyter notebook that generates simulated profiles and evaluates the halving and aliquoting algorithms
 * `analysis.ipynb`: Jupyter notebook that generates figures used in our paper
@@ -14,5 +14,5 @@ from aliquoting import cnd_halving, cnd_aliquoting_I
 
 T = [1,2,3,4,5]
 halving_distance, halving_predup_profile = cnd_halving(T)[:2]
-aliquoting_distance, aliquoting_predup_profile = cnd_aliquoting_I{T}[:2]
+aliquoting_distance, aliquoting_predup_profile = cnd_aliquoting_I(T)[:2]
 ```
