@@ -13,6 +13,7 @@ To find the halving and aliquoting distances of a profile `T`:
 from aliquoting import cnd_halving, cnd_aliquoting_I
 
 T = [1,2,3,4,5]
+p = 3
 halving_distance, halving_predup_profile = cnd_halving(T)[:2]
-aliquoting_distance, aliquoting_predup_profile = cnd_aliquoting_I(T)[:2]
+aliquoting_distance, aliquoting_predup_profile = cnd_aliquoting_I(T, p)[:2]
 ```
