@@ -1,4 +1,4 @@
-Implementations of halving and aliquoting distance algorithms in Python 3. The minimum dependencies required are `numpy`, `pandas`, `matplotlib`, and `seaborn`.
+Implementations of halving and aliquoting distance algorithms (https://drops.dagstuhl.de/opus/volltexte/2021/14371/) in Python 3. The minimum dependencies required are `numpy`, `pandas`, `matplotlib`, and `seaborn`.
 
 * `generate_data.ipynb`: Jupyter notebook that generates simulated profiles and evaluates the halving and aliquoting algorithms
 * `analysis.ipynb`: Jupyter notebook that generates figures used in our paper
